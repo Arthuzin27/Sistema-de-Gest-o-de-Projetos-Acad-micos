@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Alunos</title>
+    <link rel="stylesheet" href="../css/alunos.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+
+            <h1>Controle de Alunos</h1>
+            <p class="subtitulo">Gerencie os alunos cadastrados no sistema</p>
+        </div>
+
+        <div class="barra-ferramentas">
+            <div class="busca-container">
+                <div class="input-group">
+                    <input type="text" id="busca" placeholder="Buscar por nome ou matrícula...">
+                    <button type="button" id="btnBuscar" class="btn-busca">Buscar</button>
+                    <button type="button" class="btn-novo" onclick="abrirFormulario()">+ Novo Cadastro</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Matrícula</th>
+                        <th>Curso</th>
+                        <th>Turma</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaAlunos"></tbody>
+            </table>
+        </div>
+
+        <div class="form-section" id="formSection" style="display:none;">
+            <div class="form-header">
+                <h2 id="tituloForm">Novo Cadastro</h2>
+            </div>
+
+            <form id="formAluno">
+                <input type="hidden" id="id">
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" placeholder="Digite o nome completo" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" placeholder="exemplo@dominio.com" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" placeholder="Mínimo 6 caracteres">
+                    </div>
+                    <div class="form-field">
+                        <label for="matricula">Matrícula</label>
+                        <input type="text" id="matricula" placeholder="Número de matrícula" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="curso_id">Curso</label>
+                        <select id="curso_id" required>
+                            <option value="">Selecione um curso</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="turma_id">Turma</label>
+                        <select id="turma_id" required>
+                            <option value="">Selecione uma turma</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-acoes">
+                    <button type="submit" class="btn-salvar">Salvar</button>
+                    <button type="button" class="btn-cancelar" onclick="cancelarFormulario()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/alunos.js"></script>
+</body>
+
+</html>

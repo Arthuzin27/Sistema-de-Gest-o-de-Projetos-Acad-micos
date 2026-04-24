@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Professores e Coordenadores</title>
+    <link rel="stylesheet" href="../css/crudProfessoresCoordenadores.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="btn-voltar" onclick="voltarPagina()">← Voltar</button>
+            
+            <h1>Professores e Coordenadores</h1>
+            <p class="subtitulo">Gerencie os docentes e coordenadores do sistema</p>
+        </div>
+
+        <div class="barra-ferramentas">
+            <div class="busca-container">
+                <div class="input-group">
+                    <input type="text" id="busca" placeholder="Buscar por nome ou SIAPE...">
+                    <button type="button" id="btnBuscar" class="btn-busca">Buscar</button>
+                    <button type="button" class="btn-novo" onclick="abrirFormulario()">+ Novo Cadastro</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>SIAPE</th>
+                        <th>Tipo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaProfessores"></tbody>
+            </table>
+        </div>
+
+        <div class="form-section" id="formSection">
+            <div class="form-header">
+                <h2 id="tituloForm">Novo Cadastro</h2>
+            </div>
+
+            <form id="formProfessor">
+                <input type="hidden" id="id">
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" placeholder="Digite o nome completo" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" placeholder="exemplo@dominio.com" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" placeholder="Mínimo 6 caracteres" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="siape">SIAPE</label>
+                        <input type="text" id="siape" placeholder="Número do SIAPE" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo">
+                            <option value="professor">Professor</option>
+                            <option value="coordenador">Coordenador</option>
+                        </select>
+                    </div>
+                    <div class="form-field" id="cursoContainer">
+                        <label for="curso">Curso (para coordenador)</label>
+                        <select id="curso">
+                            <option value="">Selecione um curso</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-acoes">
+                    <button type="submit" class="btn-salvar">Salvar</button>
+                    <button type="button" class="btn-cancelar" onclick="cancelarFormulario()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/crudProfessoresCoordenadores.js"></script>
+</body>
+
+</html>

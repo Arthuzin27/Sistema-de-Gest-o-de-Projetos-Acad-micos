@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Estandes e Horários</title>
+    <link rel="stylesheet" href="../css/estandes.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="btn-voltar" onclick="voltarPagina()">← Voltar</button>
+            
+            <h1>Estandes e Horários</h1>
+            <p class="subtitulo">Gerencie a localização e o cronograma das apresentações</p>
+        </div>
+
+        <div class="barra-ferramentas">
+            <div class="busca-container">
+                <div class="input-group">
+                    <input type="text" id="busca" placeholder="Buscar por localização ou projeto...">
+                    <button type="button" class="btn-busca" onclick="listarTudo()">Buscar</button>
+                    <button type="button" class="btn-novo" onclick="abrirFormEstande()">+ Novo Estande</button>
+                    <button type="button" class="btn-novo" style="background-color: #3498db;"
+                        onclick="abrirFormHorario()">+ Novo Horário</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Projeto</th>
+                        <th>Estande (Localização)</th>
+                        <th>Horário de Apresentação</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaEstandesHorarios"></tbody>
+            </table>
+        </div>
+
+        <div class="form-section" id="formEdicaoSection" style="display: none;">
+            <div class="form-header">
+                <h2>Editar Estande / Horário</h2>
+            </div>
+            <form id="formEdicao">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="edit_localizacao">Localização do Estande</label>
+                        <input type="text" id="edit_localizacao" placeholder="Deixe em branco para não alterar">
+                    </div>
+                    <div class="form-field">
+                        <label for="edit_data_hora">Data e Hora de Apresentação</label>
+                        <input type="datetime-local" id="edit_data_hora">
+                    </div>
+                </div>
+                <div class="form-acoes">
+                    <button type="submit" class="btn-salvar">Salvar</button>
+                    <button type="button" class="btn-cancelar" onclick="fecharForms()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-section" id="formEstandeSection" style="display: none;">
+            <div class="form-header">
+                <h2>Configurar Estande</h2>
+            </div>
+            <form id="formEstande">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="localizacao">Localização</label>
+                        <input type="text" id="localizacao" placeholder="Mínimo 3 caracteres" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="projeto_id_estande">Projeto</label>
+                        <select id="projeto_id_estande" required></select>
+                    </div>
+                </div>
+                <div class="form-acoes">
+                    <button type="submit" class="btn-salvar">Salvar Estande</button>
+                    <button type="button" class="btn-cancelar" onclick="fecharForms()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-section" id="formHorarioSection" style="display: none;">
+            <div class="form-header">
+                <h2>Agendar Horário</h2>
+            </div>
+            <form id="formHorario">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="data_hora">Data e Hora</label>
+                        <input type="datetime-local" id="data_hora" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="projeto_id_horario">Projeto</label>
+                        <select id="projeto_id_horario" required></select>
+                    </div>
+                </div>
+                <div class="form-acoes">
+                    <button type="submit" class="btn-salvar">Agendar</button>
+                    <button type="button" class="btn-cancelar" onclick="fecharForms()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/estandes.js"></script>
+</body>
+
+</html>

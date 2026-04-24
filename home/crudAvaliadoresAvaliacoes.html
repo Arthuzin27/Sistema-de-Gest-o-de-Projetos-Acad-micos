@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Avaliadores e Avaliações</title>
+    <link rel="stylesheet" href="../css/crudAvaliadoresAvaliacoes.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="header">
+            <button class="btn-voltar" onclick="voltar()">← Voltar</button>
+
+            <h1>Avaliadores e Avaliações</h1>
+            <p class="subtitulo">Gerencie os avaliadores externos e as avaliações dos projetos</p>
+        </div>
+
+        <div class="abas">
+            <button class="aba ativa" onclick="trocarAba('avaliadores')">Avaliadores Externos</button>
+            <button class="aba" onclick="trocarAba('avaliacoes')">Avaliações</button>
+        </div>
+
+        <div class="barra-ferramentas">
+            <div class="busca-container">
+                <div class="input-group">
+                    <input type="text" id="busca" placeholder="Buscar por nome...">
+                    <button type="button" id="btnBuscar" class="btn-busca">Buscar</button>
+                    <button type="button" class="btn-novo" onclick="abrirFormulario()">+ Novo Cadastro</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="secao-avaliadores">
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Instituição</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaAvaliadores"></tbody>
+                </table>
+            </div>
+
+            <div class="form-section" id="formSectionAvaliador">
+                <div class="form-header">
+                    <h2 id="tituloFormAvaliador">Novo Avaliador Externo</h2>
+                </div>
+                <form id="formAvaliador">
+                    <input type="hidden" id="avaliadorId">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="avaliadorNome">Nome</label>
+                            <input type="text" id="avaliadorNome" placeholder="Mínimo 3 caracteres" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="avaliadorEmail">Email</label>
+                            <input type="email" id="avaliadorEmail" placeholder="exemplo@dominio.com" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="avaliadorSenha">Senha</label>
+                            <input type="password" id="avaliadorSenha" placeholder="Mínimo 6 caracteres">
+                        </div>
+                        <div class="form-field">
+                            <label for="avaliadorInstituicao">Instituição</label>
+                            <input type="text" id="avaliadorInstituicao" placeholder="Mínimo 3 caracteres" required>
+                        </div>
+                    </div>
+                    <div class="form-acoes">
+                        <button type="submit" class="btn-salvar">Salvar</button>
+                        <button type="button" class="btn-cancelar" onclick="cancelarFormulario()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="secao-avaliacoes" style="display:none;">
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Projeto</th>
+                            <th>Avaliador</th>
+                            <th>Nota</th>
+                            <th>Comentário</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaAvaliacoes"></tbody>
+                </table>
+            </div>
+
+            <div class="form-section" id="formSectionAvaliacao">
+                <div class="form-header">
+                    <h2 id="tituloFormAvaliacao">Nova Avaliação</h2>
+                </div>
+                <form id="formAvaliacao">
+                    <input type="hidden" id="avaliacaoId">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="avaliacaoProjeto">Projeto</label>
+                            <select id="avaliacaoProjeto" required>
+                                <option value="">Selecione um projeto</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="avaliacaoAvaliador">Avaliador</label>
+                            <select id="avaliacaoAvaliador" required>
+                                <option value="">Selecione um avaliador</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="avaliacaoNota">Nota (0 a 10)</label>
+                            <input type="number" id="avaliacaoNota" min="0" max="10" step="0.1" placeholder="Ex: 8.5"
+                                required>
+                        </div>
+                        <div class="form-field">
+                            <label class="opcional" for="avaliacaoComentario">Comentário (opcional)</label>
+                            <textarea id="avaliacaoComentario" maxlength="500" rows="3"
+                                placeholder="Máximo 500 caracteres"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-acoes">
+                        <button type="submit" class="btn-salvar">Salvar</button>
+                        <button type="button" class="btn-cancelar" onclick="cancelarFormulario()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="modalExclusao" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirmar Exclusão</h3>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja excluir <strong id="modalNomeItem"></strong>?</p>
+                <p>Esta ação não poderá ser desfeita.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancelar-modal" onclick="fecharModal()">Cancelar</button>
+                <button class="btn-confirmar" onclick="confirmarExclusao()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/crudAvaliadoresAvaliacoes.js"></script>
+</body>
+
+</html>

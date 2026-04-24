@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Grupos de Projeto</title>
+    <link rel="stylesheet" href="../css/grupos.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="btn-voltar" onclick="voltarPagina()">← Voltar</button>
+            
+            <h1>Grupos de Projeto</h1>
+            <p class="subtitulo">Gerencie os grupos de projeto do sistema</p>
+        </div>
+
+        <div class="barra-ferramentas">
+            <div class="busca-container">
+                <div class="input-group">
+                    <select id="filtraTurma">
+                        <option value="">Filtrar por turma...</option>
+                    </select>
+                    <button type="button" id="btnFiltrar" class="btn-busca">Filtrar</button>
+                    <button type="button" class="btn-novo" onclick="abrirFormulario()">+ Novo Grupo</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Turma (Curso / Período)</th>
+                        <th>Professor Orientador</th>
+                        <th>Qtd. Alunos</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaGrupos"></tbody>
+            </table>
+        </div>
+
+        <div class="form-section" id="formSection" style="display:none;">
+            <div class="form-header">
+                <h2 id="tituloForm">Novo Grupo</h2>
+            </div>
+
+            <form id="formGrupo">
+                <input type="hidden" id="id">
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="turma_id">Turma</label>
+                        <select id="turma_id" required>
+                            <option value="">Selecione uma turma</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="orientador_id">Professor Orientador</label>
+                        <select id="orientador_id" required>
+                            <option value="">Selecione um professor</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field full-width">
+                        <label for="alunos">Alunos <span class="hint">(selecione entre 2 e 6 alunos)</span></label>
+                        <div id="alunosContainer" class="alunos-lista">
+                            <p class="hint-selecione">Selecione uma turma para ver os alunos disponíveis.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-acoes">
+                    <button type="submit" class="btn-salvar">Salvar</button>
+                    <button type="button" class="btn-cancelar" onclick="cancelarFormulario()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/grupos.js"></script>
+</body>
+
+</html>

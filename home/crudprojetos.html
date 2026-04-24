@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Projetos</title>
+    <link rel="stylesheet" href="../css/crudProjetos.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="btn-voltar" onclick="voltarPagina()">← Voltar</button>
+            
+            <h1>Gerenciamento de Projetos</h1>
+            <p class="subtitulo">Cadastre e gerencie os projetos dos grupos</p>
+        </div>
+
+        <div class="barra-ferramentas">
+            <div class="busca-container">
+                <div class="input-group">
+                    <input type="text" id="busca" placeholder="Buscar por título do projeto...">
+                    <button type="button" id="btnBuscar" class="btn-busca">Buscar</button>
+                    <button type="button" class="btn-novo" onclick="abrirFormulario()">+ Novo Projeto</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Grupo Vinculado</th>
+                        <th>Descrição Resumida</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaProjetos"></tbody>
+            </table>
+        </div>
+
+        <div class="form-section" id="formSection" style="display: none;">
+            <div class="form-header">
+                <h2 id="tituloForm">Novo Projeto</h2>
+            </div>
+
+            <form id="formProjeto">
+                <input type="hidden" id="id">
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="titulo">Título do Projeto</label>
+                        <input type="text" id="titulo" placeholder="Digite o título (mínimo 5 caracteres)" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="grupo_id">Grupo</label>
+                        <select id="grupo_id" required>
+                            <option value="">Selecione um grupo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="descricao">Descrição</label>
+                        <textarea id="descricao" rows="4"
+                            placeholder="Digite a descrição do projeto (mínimo 10 caracteres)" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-acoes">
+                    <button type="submit" class="btn-salvar">Salvar</button>
+                    <button type="button" class="btn-cancelar" onclick="cancelarFormulario()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modalExclusao" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirmar Exclusão</h3>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja excluir o projeto <strong id="projetoTitulo"></strong>?</p>
+                <p>Esta ação não poderá ser desfeita.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancelar-modal" onclick="fecharModalExclusao()">Cancelar</button>
+                <button class="btn-confirmar" onclick="confirmarExclusao()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/crudProjetos.js"></script>
+</body>
+
+</html>

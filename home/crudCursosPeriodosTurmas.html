@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Cursos, Períodos e Turmas</title>
+    <link rel="stylesheet" href="../css/crudCursosPeriodosTurmas.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="btn-voltar" onclick="voltarPagina()">← Voltar</button>
+            
+            <h1>Cursos, Períodos e Turmas</h1>
+            <p class="subtitulo">Gerencie os cursos, períodos letivos e turmas do sistema</p>
+        </div>
+
+        <div class="abas">
+            <button class="aba ativa" onclick="trocarAba('cursos')">Cursos</button>
+            <button class="aba" onclick="trocarAba('periodos')">Períodos Letivos</button>
+            <button class="aba" onclick="trocarAba('turmas')">Turmas</button>
+        </div>
+
+        <div class="barra-ferramentas">
+            <div class="busca-container">
+                <div class="input-group">
+                    <input type="text" id="busca" placeholder="Buscar...">
+                    <button type="button" id="btnBuscar" class="btn-busca">Buscar</button>
+                    <button type="button" class="btn-novo" onclick="abrirFormulario()">+ Novo Cadastro</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="secao-cursos">
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome do Curso</th>
+                            <th>Coordenador</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaCursos"></tbody>
+                </table>
+            </div>
+
+            <div class="form-section" id="formSectionCurso">
+                <div class="form-header">
+                    <h2 id="tituloFormCurso">Novo Curso</h2>
+                </div>
+                <form id="formCurso">
+                    <input type="hidden" id="cursoId">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="cursoNome">Nome do Curso</label>
+                            <input type="text" id="cursoNome" placeholder="Mínimo 3 caracteres" required>
+                        </div>
+                        <div class="form-field">
+                            <label class="opcional" for="cursoCoordenador">Coordenador</label>
+                            <select id="cursoCoordenador">
+                                <option value="">Selecione um coordenador</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-acoes">
+                        <button type="submit" class="btn-salvar">Salvar</button>
+                        <button type="button" class="btn-cancelar" onclick="cancelarFormulario()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="secao-periodos" style="display:none;">
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ano</th>
+                            <th>Semestre</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaPeriodos"></tbody>
+                </table>
+            </div>
+
+            <div class="form-section" id="formSectionPeriodo">
+                <div class="form-header">
+                    <h2 id="tituloFormPeriodo">Novo Período Letivo</h2>
+                </div>
+                <form id="formPeriodo">
+                    <input type="hidden" id="periodoId">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="periodoAno">Ano</label>
+                            <input type="number" id="periodoAno" min="2020" max="2030" placeholder="2020 a 2030"
+                                required>
+                        </div>
+                        <div class="form-field">
+                            <label for="periodoSemestre">Semestre</label>
+                            <select id="periodoSemestre" required>
+                                <option value="">Selecione...</option>
+                                <option value="1">1º Semestre</option>
+                                <option value="2">2º Semestre</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-acoes">
+                        <button type="submit" class="btn-salvar">Salvar</button>
+                        <button type="button" class="btn-cancelar" onclick="cancelarFormulario()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="secao-turmas" style="display:none;">
+            <div class="tabela-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Período Letivo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaTurmas"></tbody>
+                </table>
+            </div>
+
+            <div class="form-section" id="formSectionTurma">
+                <div class="form-header">
+                    <h2 id="tituloFormTurma">Nova Turma</h2>
+                </div>
+                <form id="formTurma">
+                    <input type="hidden" id="turmaId">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="turmaCurso">Curso</label>
+                            <select id="turmaCurso" required>
+                                <option value="">Selecione um curso</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="turmaPeriodo">Período Letivo</label>
+                            <select id="turmaPeriodo" required>
+                                <option value="">Selecione um período</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-acoes">
+                        <button type="submit" class="btn-salvar">Salvar</button>
+                        <button type="button" class="btn-cancelar" onclick="cancelarFormulario()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="../js/crudCursosPeriodosTurmas.js"></script>
+</body>
+
+</html>
